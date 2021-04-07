@@ -53,6 +53,7 @@ function resizeContainer() {
 }
 
 function renderCards() {
+  container.innerHTML = "";
   const imageNames = getRandomImageNames();
 
   imageNames.forEach((imageName) => renderCardDiv(imageName));
@@ -97,8 +98,6 @@ function renderCardDiv(name) {
 function handleCardSelection(selectedCard) {
   const isCardLocked = selectedCard.classList.contains("locked");
 
-  console.log(selectedCard);
-
   if (isCardLocked || isBoardLocked) {
     return;
   }
@@ -136,6 +135,22 @@ function checkForVictory() {
     clearInterval(timer);
 
     alert(`Você ganhou em ${moves} jogadas e levou ${time} segundos!`);
+    askForNewGame();
+  }
+}
+
+function askForNewGame() {
+  const answer = window.confirm("Deseja jogar novamente?");
+
+  if (answer) {
+    receivedNumber = null;
+    isBoardLocked = false;
+    lastSelectedCard = null;
+    victoryTrack = 0;
+    moves = 0;
+    timerHtmlElemnt.innerHTML = "000";
+
+    start();
   }
 }
 

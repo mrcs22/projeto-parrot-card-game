@@ -46,7 +46,6 @@ h1 {
   transform-style: preserve-3d;
   transition: transform 0.8s;
   margin: 20px;
-  transform: rotateY(180deg);
 }
 
 img {

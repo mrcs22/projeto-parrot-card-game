@@ -7,13 +7,14 @@ let isBoardLocked = false;
 let victoryTrack = 0;
 let moves = 0;
 
+start();
+
 function start() {
   askNumberOfCards();
   resizeContainer();
   renderCards(receivedNumber);
+  suffleCards();
 }
-
-start();
 
 function askNumberOfCards() {
   //prettier-ignore
@@ -24,7 +25,7 @@ function askNumberOfCards() {
 
 function resizeContainer() {
   let sizingClass = "";
-  console.log(receivedNumber);
+
   switch (receivedNumber) {
     case 4:
       sizingClass = "mini";
@@ -42,6 +43,7 @@ function resizeContainer() {
       sizingClass = "xlarge";
       break;
   }
+
   if (sizingClass) {
     container.classList.add(sizingClass);
   }
@@ -92,6 +94,8 @@ function renderCardDiv(name) {
 function handleCardSelection(selectedCard) {
   const isCardLocked = selectedCard.classList.contains("locked");
 
+  console.log(selectedCard);
+
   if (isCardLocked || isBoardLocked) {
     return;
   }
@@ -126,4 +130,13 @@ function checkForVictory() {
     isBoardLocked = true;
     alert(`Você ganhou em ${moves} jogadas!`);
   }
+}
+
+function suffleCards() {
+  const cards = container.querySelectorAll(".card");
+
+  cards.forEach((card) => {
+    const randomPosition = Math.floor(Math.random() * receivedNumber);
+    card.style.order = randomPosition;
+  });
 }

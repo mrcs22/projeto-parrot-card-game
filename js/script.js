@@ -15,7 +15,6 @@ function start() {
   askNumberOfCards();
   resizeContainer();
   renderCards(receivedNumber);
-  suffleCards();
   startTimer();
 }
 
@@ -72,8 +71,12 @@ function getRandomImageNames() {
   }
 
   randomImageNames = [...randomImageNames, ...randomImageNames];
+  randomImageNames.sort(comparador);
 
   return randomImageNames;
+}
+function comparador() {
+  return Math.random() - 0.5;
 }
 
 function renderCardDiv(name) {
@@ -152,15 +155,6 @@ function askForNewGame() {
 
     start();
   }
-}
-
-function suffleCards() {
-  const cards = container.querySelectorAll(".card");
-
-  cards.forEach((card) => {
-    const randomPosition = Math.floor(Math.random() * receivedNumber);
-    card.style.order = randomPosition;
-  });
 }
 
 function startTimer() {

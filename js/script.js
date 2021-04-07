@@ -2,6 +2,8 @@ const container = document.querySelector(".container");
 //prettier-ignore
 const imageNames = ["bobross","explody","fiesta","metal","revertit","triplets","unicorn"];
 let receivedNumber = null;
+let lastSelectedCard = null;
+let isBoardLocked = false;
 
 function start() {
   askNumberOfCards();
@@ -43,6 +45,8 @@ function getRandomImageNames() {
 function renderCardDiv(name) {
   const div = document.createElement("div");
   div.classList.add("card");
+  div.setAttribute("id", name);
+  div.addEventListener("click", () => handleCardSelection(div));
 
   const backImage = document.createElement("img");
   backImage.classList.add("back-card");
@@ -55,4 +59,31 @@ function renderCardDiv(name) {
   div.appendChild(frontImage);
 
   container.appendChild(div);
+}
+
+function handleCardSelection(selectedCard) {
+  const isCardLocked = selectedCard.classList.contains("locked");
+
+  if (isCardLocked || isBoardLocked) {
+    return;
+  }
+
+  selectedCard.classList.add("flipped", "locked");
+
+  if (lastSelectedCard === null) {
+    lastSelectedCard = selectedCard;
+  } else if (selectedCard.id === lastSelectedCard.id) {
+    lastSelectedCard = null;
+  } else {
+    isBoardLocked = true;
+
+    setTimeout(() => {
+      selectedCard.classList.remove("flipped", "locked");
+
+      lastSelectedCard.classList.remove("flipped", "locked");
+      lastSelectedCard = null;
+
+      isBoardLocked = false;
+    }, 1000);
+  }
 }

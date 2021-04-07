@@ -29,7 +29,7 @@ h1 {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  max-width: 1200px;
+  max-width: 95%;
   margin: 0 auto;
 }
 .mini {

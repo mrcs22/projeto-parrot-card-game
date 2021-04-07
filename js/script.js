@@ -4,6 +4,8 @@ const imageNames = ["bobross","explody","fiesta","metal","revertit","triplets","
 let receivedNumber = null;
 let lastSelectedCard = null;
 let isBoardLocked = false;
+let victoryTrack = 0;
+let moves = 0;
 
 function start() {
   askNumberOfCards();
@@ -73,6 +75,7 @@ function handleCardSelection(selectedCard) {
   if (lastSelectedCard === null) {
     lastSelectedCard = selectedCard;
   } else if (selectedCard.id === lastSelectedCard.id) {
+    victoryTrack++;
     lastSelectedCard = null;
   } else {
     isBoardLocked = true;
@@ -85,5 +88,16 @@ function handleCardSelection(selectedCard) {
 
       isBoardLocked = false;
     }, 1000);
+  }
+
+  moves++;
+  checkForVictory();
+}
+
+function checkForVictory() {
+  const victory = receivedNumber / 2;
+  if (victoryTrack === victory) {
+    isBoardLocked = true;
+    alert(`Você ganhou em ${moves} jogadas!`);
   }
 }

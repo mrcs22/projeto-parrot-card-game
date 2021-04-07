@@ -12,6 +12,8 @@ h1 {
 }
 
 .container {
+  display: flex;
+  flex-wrap: wrap;
   width: 90%;
   margin: 0 auto;
 }
@@ -27,6 +29,7 @@ h1 {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 1s;
+  margin: 20px;
 }
 
 img {

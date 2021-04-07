@@ -9,6 +9,7 @@ let moves = 0;
 
 function start() {
   askNumberOfCards();
+  resizeContainer();
   renderCards(receivedNumber);
 }
 
@@ -19,6 +20,31 @@ function askNumberOfCards() {
   while (receivedNumber % 2 !== 0 || receivedNumber < 4 || receivedNumber > 14 ) {
     receivedNumber = parseInt(prompt("Com quantas cartas você quer jogar?"));
     }
+}
+
+function resizeContainer() {
+  let sizingClass = "";
+  console.log(receivedNumber);
+  switch (receivedNumber) {
+    case 4:
+      sizingClass = "mini";
+      break;
+    case 6:
+      sizingClass = "small";
+      break;
+    case 8:
+      sizingClass = "normal";
+      break;
+    case 10:
+      sizingClass = "large";
+      break;
+    case 12:
+      sizingClass = "xlarge";
+      break;
+  }
+  if (sizingClass) {
+    container.classList.add(sizingClass);
+  }
 }
 
 function renderCards() {

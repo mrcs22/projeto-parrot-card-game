@@ -1,3 +1,5 @@
+const timerHtmlElemnt = document.getElementById("timer");
+let timer = null;
 const container = document.querySelector(".container");
 //prettier-ignore
 const imageNames = ["bobross","explody","fiesta","metal","revertit","triplets","unicorn"];
@@ -14,6 +16,7 @@ function start() {
   resizeContainer();
   renderCards(receivedNumber);
   suffleCards();
+  startTimer();
 }
 
 function askNumberOfCards() {
@@ -125,10 +128,14 @@ function handleCardSelection(selectedCard) {
 }
 
 function checkForVictory() {
+  const time = parseInt(timerHtmlElemnt.innerHTML);
   const victory = receivedNumber / 2;
   if (victoryTrack === victory) {
     isBoardLocked = true;
-    alert(`Você ganhou em ${moves} jogadas!`);
+
+    clearInterval(timer);
+
+    alert(`Você ganhou em ${moves} jogadas e levou ${time} segundos!`);
   }
 }
 
@@ -139,4 +146,18 @@ function suffleCards() {
     const randomPosition = Math.floor(Math.random() * receivedNumber);
     card.style.order = randomPosition;
   });
+}
+
+function startTimer() {
+  timer = setInterval(() => {
+    let time = parseInt(timerHtmlElemnt.innerHTML);
+    time++;
+    if (time < 10) {
+      time = `00${time}`;
+    } else {
+      time = `0${time}`;
+    }
+
+    timerHtmlElemnt.innerHTML = time;
+  }, 1000);
 }

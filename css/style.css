@@ -2,6 +2,20 @@ body {
   background-color: #eef9bf;
 }
 
+#timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  width: 50px;
+  background-color: #c6dd60;
+  border: 1px solid #e4f3a4;
+  border-radius: 10px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
 h1 {
   font-family: "Roboto";
   font-weight: 700;

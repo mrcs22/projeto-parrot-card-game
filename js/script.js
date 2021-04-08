@@ -1,8 +1,9 @@
 const timerHtmlElemnt = document.getElementById("timer");
-let timer = null;
 const container = document.querySelector(".container");
 //prettier-ignore
 const imageNames = ["bobross","explody","fiesta","metal","revertit","triplets","unicorn"];
+
+let timer = null;
 let receivedNumber = null;
 let lastSelectedCard = null;
 let isBoardLocked = false;
@@ -26,7 +27,7 @@ function askNumberOfCards() {
 }
 
 function resizeContainer() {
-  let sizingClass = "";
+  let sizingClass = null;
 
   switch (receivedNumber) {
     case 4:
@@ -46,13 +47,12 @@ function resizeContainer() {
       break;
   }
 
-  if (sizingClass) {
-    container.classList.add(sizingClass);
+  if (sizingClass !== null) {
+    container.classList.toggle(sizingClass);
   }
 }
 
 function renderCards() {
-  container.innerHTML = "";
   const imageNames = getRandomImageNames();
 
   imageNames.forEach((imageName) => renderCardDiv(imageName));
@@ -97,7 +97,6 @@ function renderCardDiv(name) {
 
   container.appendChild(div);
 }
-
 function handleCardSelection(selectedCard) {
   const isCardLocked = selectedCard.classList.contains("locked");
 
@@ -128,7 +127,6 @@ function handleCardSelection(selectedCard) {
   moves++;
   checkForVictory();
 }
-
 function checkForVictory() {
   const time = parseInt(timerHtmlElemnt.innerHTML);
   const victory = receivedNumber / 2;
@@ -141,11 +139,13 @@ function checkForVictory() {
     askForNewGame();
   }
 }
-
 function askForNewGame() {
   const answer = window.confirm("Deseja jogar novamente?");
 
   if (answer) {
+    container.innerHTML = "";
+    resizeContainer();
+
     receivedNumber = null;
     isBoardLocked = false;
     lastSelectedCard = null;

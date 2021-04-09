@@ -90,7 +90,7 @@ function renderCardDiv(name) {
   backImage.setAttribute("src", `./img/${name}parrot.gif`);
 
   const frontImage = document.createElement("img");
-  frontImage.setAttribute("src", "./img/front.jpeg");
+  frontImage.setAttribute("src", "./img/front.png");
 
   div.appendChild(backImage);
   div.appendChild(frontImage);

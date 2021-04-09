@@ -135,8 +135,10 @@ function checkForVictory() {
 
     clearInterval(timer);
 
-    alert(`Você ganhou em ${moves} jogadas e levou ${time} segundos!`);
-    askForNewGame();
+    setTimeout(() => {
+      alert(`Você ganhou em ${moves} jogadas e levou ${time} segundos!`);
+      askForNewGame();
+    }, 200);
   }
 }
 function askForNewGame() {
